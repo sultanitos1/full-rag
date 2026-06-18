@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+body.json
+server_*.log
+src/model_instruction
