@@ -1,0 +1,294 @@
+{
+  "info": {
+    "_postman_id": "4fa469bb-b9e7-412d-be4d-698cb97f8ae0",
+    "name": "mini-rag-app",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Base",
+      "item": [
+        {
+          "name": "Welcome",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api}}/api/v1/",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Data - Upload & Process",
+      "item": [
+        {
+          "name": "Upload File",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": "" },
+                { "key": "city", "value": "", "type": "text" },
+                { "key": "doc_type", "value": "", "type": "text" }
+              ]
+            },
+            "url": {
+              "raw": "{{api}}/api/v1/data/upload/{{project_id}}",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "data", "upload", "{{project_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Process File",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"file_id\": null,\n    \"chunk_size\": 512,\n    \"overlap_size\": 20,\n    \"do_reset\": 0\n}"
+            },
+            "url": {
+              "raw": "{{api}}/api/v1/data/process/{{project_id}}",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "data", "process", "{{project_id}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Data - Management",
+      "item": [
+        {
+          "name": "Update Asset",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"city\": \"cairo\",\n    \"doc_type\": \"guide\"\n}"
+            },
+            "url": {
+              "raw": "{{api}}/api/v1/data/asset/{{asset_id}}",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "data", "asset", "{{asset_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Uncategorized Assets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api}}/api/v1/data/assets/uncategorized",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "data", "assets", "uncategorized"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{api}}/api/v1/data/project/{{project_id}}",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "data", "project", "{{project_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete File",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{api}}/api/v1/data/file/{{file_id}}",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "data", "file", "{{file_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Chunks",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{api}}/api/v1/data/chunks/{{project_id}}",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "data", "chunks", "{{project_id}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Data - Cities",
+      "item": [
+        {
+          "name": "List Cities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api}}/api/v1/data/cities",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "data", "cities"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add City",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"city_name\": \"paris\"\n}"
+            },
+            "url": {
+              "raw": "{{api}}/api/v1/data/cities",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "data", "cities"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "NLP - Chat (Global)",
+      "item": [
+        {
+          "name": "Chat",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"text\": \"What is RAG?\",\n    \"limit\": 5,\n    \"city\": null,\n    \"doc_type\": null\n}"
+            },
+            "url": {
+              "raw": "{{api}}/api/v1/nlp/chat",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "nlp", "chat"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "NLP - Legacy Index",
+      "item": [
+        {
+          "name": "Index Push",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"do_reset\": 0\n}"
+            },
+            "url": {
+              "raw": "{{api}}/api/v1/nlp/index/push/{{project_id}}",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "nlp", "index", "push", "{{project_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Index Info",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api}}/api/v1/nlp/index/info/{{project_id}}",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "nlp", "index", "info", "{{project_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search (legacy)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"text\": \"What is RAG?\",\n    \"limit\": 5\n}"
+            },
+            "url": {
+              "raw": "{{api}}/api/v1/nlp/index/search/{{project_id}}",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "nlp", "index", "search", "{{project_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Answer (legacy)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"text\": \"What is RAG?\",\n    \"limit\": 5\n}"
+            },
+            "url": {
+              "raw": "{{api}}/api/v1/nlp/index/answer/{{project_id}}",
+              "host": ["{{api}}"],
+              "path": ["api", "v1", "nlp", "index", "answer", "{{project_id}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    { "key": "api", "value": "http://127.0.0.1:5000", "type": "string" },
+    { "key": "project_id", "value": "myproject", "type": "string" },
+    { "key": "asset_id", "value": "", "type": "string" },
+    { "key": "file_id", "value": "", "type": "string" }
+  ]
+}
